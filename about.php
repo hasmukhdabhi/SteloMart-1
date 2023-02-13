@@ -13,7 +13,7 @@ include("functions/functions.php");
 
 <head>
 
-<title>E commerce Store hasmukh </title>
+<title>E commerce Store</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
 
