@@ -13,680 +13,638 @@ include("functions/functions.php");
 
 <head>
 
-<title>E commerce Store </title>
+	<title>E commerce Store </title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet" >
+	<link href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" rel="stylesheet">
 
-<link href="styles/bootstrap.min.css" rel="stylesheet">
+	<link href="styles/bootstrap.min.css" rel="stylesheet">
 
-<link href="styles/style.css" rel="stylesheet">
+	<link href="styles/style.css" rel="stylesheet">
 
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div id="top"><!-- top Starts -->
+	<div id="top"><!-- top Starts -->
 
-<div class="container"><!-- container Starts -->
+		<div class="container"><!-- container Starts -->
 
-<div class="col-md-6 offer"><!-- col-md-6 offer Starts -->
+			<div class="col-md-6 offer"><!-- col-md-6 offer Starts -->
 
-<a href="#" class="btn btn-success btn-sm" >
+				<a href="#" class="btn btn-success btn-sm">
 
-<?php
+					<?php
 
-if(!isset($_SESSION['customer_email'])){
+					if (!isset($_SESSION['customer_email'])) {
 
-echo "Welcome :Guest";
+						echo "Welcome :Guest";
+					} else {
 
+						echo "Welcome : " . $_SESSION['customer_email'] . "";
+					}
 
-}else{
 
-echo "Welcome : " . $_SESSION['customer_email'] . "";
+					?>
+				</a>
 
-}
+				<a href="#">
+					Shopping Cart Total Price: <span class="subtotal-cart-price"><?php total_price(); ?></span>, Total Items <?php items(); ?>
+				</a>
 
+			</div><!-- col-md-6 offer Ends -->
 
-?>
-</a>
+			<div class="col-md-6"><!-- col-md-6 Starts -->
+				<ul class="menu"><!-- menu Starts -->
 
-<a href="#">
-Shopping Cart Total Price: <span class="subtotal-cart-price"><?php total_price(); ?></span>, Total Items <?php items(); ?>
-</a>
+					<li>
+						<a href="customer_register.php">
+							Register
+						</a>
+					</li>
 
-</div><!-- col-md-6 offer Ends -->
+					<li>
+						<?php
 
-<div class="col-md-6"><!-- col-md-6 Starts -->
-<ul class="menu"><!-- menu Starts -->
+						if (!isset($_SESSION['customer_email'])) {
 
-<li>
-<a href="customer_register.php">
-Register
-</a>
-</li>
+							echo "<a href='checkout.php' >My Account</a>";
+						} else {
 
-<li>
-<?php
+							echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+						}
 
-if(!isset($_SESSION['customer_email'])){
 
-echo "<a href='checkout.php' >My Account</a>";
+						?>
+					</li>
 
-}
-else{
+					<li>
+						<a href="cart.php">
+							Go to Cart
+						</a>
+					</li>
 
-echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+					<li>
+						<?php
 
-}
+						if (!isset($_SESSION['customer_email'])) {
 
+							echo "<a href='checkout.php'> Login </a>";
+						} else {
 
-?>
-</li>
+							echo "<a href='logout.php'> Logout </a>";
+						}
 
-<li>
-<a href="cart.php">
-Go to Cart
-</a>
-</li>
+						?>
+					</li>
 
-<li>
-<?php
+				</ul><!-- menu Ends -->
 
-if(!isset($_SESSION['customer_email'])){
+			</div><!-- col-md-6 Ends -->
 
-echo "<a href='checkout.php'> Login </a>";
+		</div><!-- container Ends -->
+	</div><!-- top Ends -->
 
-}else {
+	<div class="navbar navbar-default" id="navbar"><!-- navbar navbar-default Starts -->
+		<div class="container"><!-- container Starts -->
 
-echo "<a href='logout.php'> Logout </a>";
+			<div class="navbar-header"><!-- navbar-header Starts -->
 
-}
+				<a class="navbar-brand home" href="index.php"><!--- navbar navbar-brand home Starts -->
 
-?>
-</li>
+					<img src="images/EcommerceStore.png" alt="computerfever logo" class="hidden-xs">
+					<img src="images/EcommerceStoreSmall.png" alt="computerfever logo" class="visible-xs">
 
-</ul><!-- menu Ends -->
 
-</div><!-- col-md-6 Ends -->
+				</a><!--- navbar navbar-brand home Ends -->
 
-</div><!-- container Ends -->
-</div><!-- top Ends -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
 
-<div class="navbar navbar-default" id="navbar"><!-- navbar navbar-default Starts -->
-<div class="container" ><!-- container Starts -->
+					<span class="sr-only">Toggle Navigation </span>
 
-<div class="navbar-header"><!-- navbar-header Starts -->
+					<i class="fa fa-align-justify"></i>
 
-<a class="navbar-brand home" href="index.php" ><!--- navbar navbar-brand home Starts -->
+				</button>
 
-<img src="images/EcommerceStore.png" alt="computerfever logo" class="hidden-xs" >
-<img src="images/EcommerceStoreSmall.png" alt="computerfever logo" class="visible-xs" >
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
 
+					<span class="sr-only">Toggle Search</span>
 
-</a><!--- navbar navbar-brand home Ends -->
+					<i class="fa fa-search"></i>
 
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation"  >
+				</button>
 
-<span class="sr-only" >Toggle Navigation </span>
 
-<i class="fa fa-align-justify"></i>
+			</div><!-- navbar-header Ends -->
 
-</button>
+			<div class="navbar-collapse collapse" id="navigation"><!-- navbar-collapse collapse Starts -->
 
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search" >
+				<div class="padding-nav"><!-- padding-nav Starts -->
 
-<span class="sr-only" >Toggle Search</span>
+					<ul class="nav navbar-nav navbar-left"><!-- nav navbar-nav navbar-left Starts -->
 
-<i class="fa fa-search" ></i>
+						<li>
+							<a href="index.php"> Home </a>
+						</li>
 
-</button>
+						<li>
+							<a href="shop.php"> Shop </a>
+						</li>
 
+						<li>
+							<?php
 
-</div><!-- navbar-header Ends -->
+							if (!isset($_SESSION['customer_email'])) {
 
-<div class="navbar-collapse collapse" id="navigation" ><!-- navbar-collapse collapse Starts -->
+								echo "<a href='checkout.php' >My Account</a>";
+							} else {
 
-<div class="padding-nav" ><!-- padding-nav Starts -->
+								echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+							}
 
-<ul class="nav navbar-nav navbar-left"><!-- nav navbar-nav navbar-left Starts -->
 
-<li>
-<a href="index.php"> Home </a>
-</li>
+							?>
+						</li>
 
-<li>
-<a href="shop.php"> Shop </a>
-</li>
+						<li class="active">
+							<a href="cart.php"> Shopping Cart </a>
+						</li>
 
-<li>
-<?php
+						<li>
+							<a href="about.php"> About Us </a>
+						</li>
 
-if(!isset($_SESSION['customer_email'])){
+						<li>
 
-echo "<a href='checkout.php' >My Account</a>";
+							<a href="services.php"> Services </a>
 
-}
-else{
+						</li>
 
-echo "<a href='customer/my_account.php?my_orders'>My Account</a>";
+						<li>
+							<a href="contact.php"> Contact Us </a>
+						</li>
 
-}
+					</ul><!-- nav navbar-nav navbar-left Ends -->
 
+				</div><!-- padding-nav Ends -->
 
-?>
-</li>
+				<a class="btn btn-primary navbar-btn right" href="cart.php"><!-- btn btn-primary navbar-btn right Starts -->
 
-<li class="active" >
-<a href="cart.php"> Shopping Cart </a>
-</li>
+					<i class="fa fa-shopping-cart"></i>
 
-<li>
-<a href="about.php"> About Us </a>
-</li>
+					<span> <?php items(); ?> items in cart </span>
 
-<li>
+				</a><!-- btn btn-primary navbar-btn right Ends -->
 
-<a href="services.php"> Services </a>
+				<div class="navbar-collapse collapse right"><!-- navbar-collapse collapse right Starts -->
 
-</li>
+					<button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
 
-<li>
-<a href="contact.php"> Contact Us </a>
-</li>
+						<span class="sr-only">Toggle Search</span>
 
-</ul><!-- nav navbar-nav navbar-left Ends -->
+						<i class="fa fa-search"></i>
 
-</div><!-- padding-nav Ends -->
+					</button>
 
-<a class="btn btn-primary navbar-btn right" href="cart.php"><!-- btn btn-primary navbar-btn right Starts -->
+				</div><!-- navbar-collapse collapse right Ends -->
 
-<i class="fa fa-shopping-cart"></i>
+				<div class="collapse clearfix" id="search"><!-- collapse clearfix Starts -->
 
-<span> <?php items(); ?> items in cart </span>
+					<form class="navbar-form" method="get" action="results.php"><!-- navbar-form Starts -->
 
-</a><!-- btn btn-primary navbar-btn right Ends -->
+						<div class="input-group"><!-- input-group Starts -->
 
-<div class="navbar-collapse collapse right"><!-- navbar-collapse collapse right Starts -->
+							<input class="form-control" type="text" placeholder="Search" name="user_query" required>
 
-<button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
+							<span class="input-group-btn"><!-- input-group-btn Starts -->
 
-<span class="sr-only">Toggle Search</span>
+								<button type="submit" value="Search" name="search" class="btn btn-primary">
 
-<i class="fa fa-search"></i>
+									<i class="fa fa-search"></i>
 
-</button>
+								</button>
 
-</div><!-- navbar-collapse collapse right Ends -->
+							</span><!-- input-group-btn Ends -->
 
-<div class="collapse clearfix" id="search"><!-- collapse clearfix Starts -->
+						</div><!-- input-group Ends -->
 
-<form class="navbar-form" method="get" action="results.php"><!-- navbar-form Starts -->
+					</form><!-- navbar-form Ends -->
 
-<div class="input-group"><!-- input-group Starts -->
+				</div><!-- collapse clearfix Ends -->
 
-<input class="form-control" type="text" placeholder="Search" name="user_query" required>
+			</div><!-- navbar-collapse collapse Ends -->
 
-<span class="input-group-btn"><!-- input-group-btn Starts -->
+		</div><!-- container Ends -->
+	</div><!-- navbar navbar-default Ends -->
 
-<button type="submit" value="Search" name="search" class="btn btn-primary">
 
-<i class="fa fa-search"></i>
+	<div id="content"><!-- content Starts -->
+		<div class="container"><!-- container Starts -->
 
-</button>
+			<div class="col-md-12"><!--- col-md-12 Starts -->
 
-</span><!-- input-group-btn Ends -->
+				<ul class="breadcrumb"><!-- breadcrumb Starts -->
 
-</div><!-- input-group Ends -->
+					<li>
+						<a href="index.php">Home</a>
+					</li>
 
-</form><!-- navbar-form Ends -->
+					<li>Cart</li>
 
-</div><!-- collapse clearfix Ends -->
+				</ul><!-- breadcrumb Ends -->
 
-</div><!-- navbar-collapse collapse Ends -->
+				<nav class="checkout-breadcrumbs text-center">
 
-</div><!-- container Ends -->
-</div><!-- navbar navbar-default Ends -->
+					<a href="cart.php" class="active"> Shopping Cart </a>
 
+					<i class="fa fa-chevron-right"></i>
 
-<div id="content" ><!-- content Starts -->
-<div class="container" ><!-- container Starts -->
+					<a href="checkout.php"> Checkout Details </a>
 
-<div class="col-md-12" ><!--- col-md-12 Starts -->
+					<i class="fa fa-chevron-right"></i>
 
-<ul class="breadcrumb" ><!-- breadcrumb Starts -->
+					<a href="#"> Order Complete </a>
 
-<li>
-<a href="index.php">Home</a>
-</li>
+				</nav>
 
-<li>Cart</li>
+			</div><!--- col-md-12 Ends -->
 
-</ul><!-- breadcrumb Ends -->
 
-<nav class="checkout-breadcrumbs text-center">
+			<div class="col-md-9" id="cart"><!-- col-md-9 Starts -->
 
-<a href="cart.php" class="active"> Shopping Cart </a>
+				<div class="box"><!-- box Starts -->
 
-<i class="fa fa-chevron-right"></i>
+					<form action="cart.php" method="post" enctype="multipart-form-data"><!-- form Starts -->
 
-<a href="checkout.php"> Checkout Details </a>
+						<h1> Shopping Cart </h1>
 
-<i class="fa fa-chevron-right"></i>
+						<?php
 
-<a href="#"> Order Complete </a>
+						$ip_add = getRealUserIp();
 
-</nav>
+						$select_cart = "select * from cart where ip_add='$ip_add'";
 
-</div><!--- col-md-12 Ends -->
+						$run_cart = mysqli_query($con, $select_cart);
 
+						$count = mysqli_num_rows($run_cart);
 
-<div class="col-md-9" id="cart" ><!-- col-md-9 Starts -->
+						?>
 
-<div class="box" ><!-- box Starts -->
+						<p class="text-muted"> You currently have <?php echo items(); ?> item(s) in your cart. </p>
 
-<form action="cart.php" method="post" enctype="multipart-form-data" ><!-- form Starts -->
+						<div class="table-responsive"><!-- table-responsive Starts -->
 
-<h1> Shopping Cart </h1>
+							<table class="table"><!-- table Starts -->
 
-<?php
+								<thead><!-- thead Starts -->
 
-$ip_add = getRealUserIp();
+									<tr>
 
-$select_cart = "select * from cart where ip_add='$ip_add'";
+										<th colspan="2">Product</th>
 
-$run_cart = mysqli_query($con,$select_cart);
+										<th>Quantity</th>
 
-$count = mysqli_num_rows($run_cart);
+										<th>Unit Price</th>
 
-?>
+										<th>Size</th>
 
-<p class="text-muted" > You currently have <?php echo items(); ?> item(s) in your cart. </p>
+										<th colspan="1">Delete</th>
 
-<div class="table-responsive" ><!-- table-responsive Starts -->
+										<th colspan="2"> Sub Total </th>
 
-<table class="table" ><!-- table Starts -->
 
-<thead><!-- thead Starts -->
+									</tr>
 
-<tr>
+								</thead><!-- thead Ends -->
 
-<th colspan="2" >Product</th>
+								<tbody id="cart-products-tbody"><!-- tbody Starts -->
 
-<th>Quantity</th>
+									<?php
 
-<th>Unit Price</th>
+									$total = 0;
 
-<th>Size</th>
+									$total_weight = 0;
 
-<th colspan="1">Delete</th>
+									$physical_products = array();
 
-<th colspan="2"> Sub Total </th>
+									while ($row_cart = mysqli_fetch_array($run_cart)) {
 
+										$pro_id = $row_cart['p_id'];
 
-</tr>
+										$pro_size = $row_cart['size'];
 
-</thead><!-- thead Ends -->
+										$pro_qty = $row_cart['qty'];
 
-<tbody id="cart-products-tbody"><!-- tbody Starts -->
+										$only_price = $row_cart['p_price'];
 
-<?php
+										$get_products = "select * from products where product_id='$pro_id'";
 
-$total = 0;
+										$run_products = mysqli_query($con, $get_products);
 
-$total_weight = 0;
+										while ($row_products = mysqli_fetch_array($run_products)) {
 
-$physical_products = array();
+											$product_title = $row_products['product_title'];
 
-while($row_cart = mysqli_fetch_array($run_cart)){
+											$product_img1 = $row_products['product_img1'];
 
-$pro_id = $row_cart['p_id'];
+											$product_type = $row_products['product_type'];
 
-$pro_size = $row_cart['size'];
+											$product_weight = $row_products['product_weight'];
 
-$pro_qty = $row_cart['qty'];
+											$sub_total_weight = $product_weight * $pro_qty;
 
-$only_price = $row_cart['p_price'];
+											$total_weight += $sub_total_weight;
 
-$get_products = "select * from products where product_id='$pro_id'";
+											if ($product_type == "physical_product") {
 
-$run_products = mysqli_query($con,$get_products);
+												array_push($physical_products, $pro_id);
+											}
 
-while($row_products = mysqli_fetch_array($run_products)){
+											$sub_total = $only_price * $pro_qty;
 
-$product_title = $row_products['product_title'];
+											$_SESSION['pro_qty'] = $pro_qty;
 
-$product_img1 = $row_products['product_img1'];
+											$total += $sub_total;
 
-$product_type = $row_products['product_type'];
+									?>
 
-$product_weight = $row_products['product_weight'];
+											<tr><!-- tr Starts -->
 
-$sub_total_weight = $product_weight * $pro_qty;
+												<td>
 
-$total_weight += $sub_total_weight;
+													<img src="admin_area/product_images/<?php echo $product_img1; ?>">
 
-if($product_type == "physical_product" ){
+												</td>
 
-array_push($physical_products, $pro_id);
-	
-	
-}
+												<td>
 
-$sub_total = $only_price*$pro_qty;
+													<a href="#"> <?php echo $product_title; ?> </a>
 
-$_SESSION['pro_qty'] = $pro_qty;
+												</td>
 
-$total += $sub_total;
+												<td>
+													<input type="text" name="quantity" value="<?php echo $_SESSION['pro_qty']; ?>" data-product_id="<?php echo $pro_id; ?>" class="quantity form-control">
+												</td>
 
-?>
+												<td>
 
-<tr><!-- tr Starts -->
+													$<?php echo $only_price; ?>.00
 
-<td>
+												</td>
 
-<img src="admin_area/product_images/<?php echo $product_img1; ?>" >
+												<td>
 
-</td>
+													<?php echo $pro_size; ?>
 
-<td>
+												</td>
 
-<a href="#" > <?php echo $product_title; ?> </a>
+												<td>
+													<input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">
+												</td>
 
-</td>
+												<td>
 
-<td>
-<input type="text" name="quantity" value="<?php echo $_SESSION['pro_qty']; ?>" data-product_id="<?php echo $pro_id; ?>" class="quantity form-control">
-</td>
+													$<?php echo $sub_total; ?>.00
 
-<td>
+												</td>
 
-$<?php echo $only_price; ?>.00
+											</tr><!-- tr Ends -->
 
-</td>
+									<?php }
+									} ?>
 
-<td>
+								</tbody><!-- tbody Ends -->
 
-<?php echo $pro_size; ?>
+								<tfoot><!-- tfoot Starts -->
 
-</td>
+									<tr>
 
-<td>
-<input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>">
-</td>
+										<th colspan="5"> Total </th>
 
-<td>
+										<th colspan="2"> <span class="subtotal-cart-price">$<?php echo $total; ?></span>.00 </th>
 
-$<?php echo $sub_total; ?>.00
+									</tr>
 
-</td>
+								</tfoot><!-- tfoot Ends -->
 
-</tr><!-- tr Ends -->
+							</table><!-- table Ends -->
 
-<?php } } ?>
+							<div class="form-inline pull-right"><!-- form-inline pull-right Starts -->
 
-</tbody><!-- tbody Ends -->
+								<div class="form-group"><!-- form-group Starts -->
 
-<tfoot><!-- tfoot Starts -->
+									<label>Coupon Code : </label>
 
-<tr>
+									<input type="text" name="code" class="form-control">
 
-<th colspan="5"> Total </th>
+								</div><!-- form-group Ends -->
 
-<th colspan="2"> <span class="subtotal-cart-price">$<?php echo $total; ?></span>.00 </th>
+								<input class="btn btn-primary" type="submit" name="apply_coupon" value="Apply Coupon Code">
 
-</tr>
+							</div><!-- form-inline pull-right Ends -->
 
-</tfoot><!-- tfoot Ends -->
+						</div><!-- table-responsive Ends -->
 
-</table><!-- table Ends -->
 
-<div class="form-inline pull-right"><!-- form-inline pull-right Starts -->
+						<div class="box-footer"><!-- box-footer Starts -->
 
-<div class="form-group"><!-- form-group Starts -->
+							<div class="pull-left"><!-- pull-left Starts -->
 
-<label>Coupon Code : </label>
+								<a href="index.php" class="btn btn-default">
 
-<input type="text" name="code" class="form-control">
+									<i class="fa fa-chevron-left"></i> Continue Shopping
 
-</div><!-- form-group Ends -->
+								</a>
 
-<input class="btn btn-primary" type="submit" name="apply_coupon" value="Apply Coupon Code" >
+							</div><!-- pull-left Ends -->
 
-</div><!-- form-inline pull-right Ends -->
+							<div class="pull-right"><!-- pull-right Starts -->
 
-</div><!-- table-responsive Ends -->
+								<button class="btn btn-default" type="submit" name="update" value="Update Cart">
 
+									<i class="fa fa-refresh"></i> Update Cart
 
-<div class="box-footer"><!-- box-footer Starts -->
+								</button>
 
-<div class="pull-left"><!-- pull-left Starts -->
+								<a href="checkout.php" class="btn btn-primary">
 
-<a href="index.php" class="btn btn-default">
+									Proceed to checkout <i class="fa fa-chevron-right"></i>
 
-<i class="fa fa-chevron-left"></i> Continue Shopping
+								</a>
 
-</a>
+							</div><!-- pull-right Ends -->
 
-</div><!-- pull-left Ends -->
+						</div><!-- box-footer Ends -->
 
-<div class="pull-right"><!-- pull-right Starts -->
+					</form><!-- form Ends -->
 
-<button class="btn btn-default" type="submit" name="update" value="Update Cart">
 
-<i class="fa fa-refresh"></i> Update Cart
+				</div><!-- box Ends -->
 
-</button>
+				<?php
 
-<a href="checkout.php" class="btn btn-primary">
+				if (isset($_POST['apply_coupon'])) {
 
-Proceed to checkout <i class="fa fa-chevron-right"></i>
+					$code = $_POST['code'];
 
-</a>
+					if ($code == "") {
+					} else {
 
-</div><!-- pull-right Ends -->
+						$get_coupons = "select * from coupons where coupon_code='$code'";
 
-</div><!-- box-footer Ends -->
+						$run_coupons = mysqli_query($con, $get_coupons);
 
-</form><!-- form Ends -->
+						$check_coupons = mysqli_num_rows($run_coupons);
 
+						if ($check_coupons == 1) {
 
-</div><!-- box Ends -->
+							$row_coupons = mysqli_fetch_array($run_coupons);
 
-<?php
+							$coupon_pro = $row_coupons['product_id'];
 
-if(isset($_POST['apply_coupon'])){
+							$coupon_price = $row_coupons['coupon_price'];
 
-$code = $_POST['code'];
+							$coupon_limit = $row_coupons['coupon_limit'];
 
-if($code == ""){
+							$coupon_used = $row_coupons['coupon_used'];
 
 
-}
-else{
+							if ($coupon_limit == $coupon_used) {
 
-$get_coupons = "select * from coupons where coupon_code='$code'";
+								echo "<script>alert('Your Coupon Code Has Been Expired')</script>";
+							} else {
 
-$run_coupons = mysqli_query($con,$get_coupons);
+								$get_cart = "select * from cart where p_id='$coupon_pro' AND ip_add='$ip_add'";
 
-$check_coupons = mysqli_num_rows($run_coupons);
+								$run_cart = mysqli_query($con, $get_cart);
 
-if($check_coupons == 1){
+								$check_cart = mysqli_num_rows($run_cart);
 
-$row_coupons = mysqli_fetch_array($run_coupons);
 
-$coupon_pro = $row_coupons['product_id'];
+								if ($check_cart == 1) {
 
-$coupon_price = $row_coupons['coupon_price'];
+									$add_used = "update coupons set coupon_used=coupon_used+1 where coupon_code='$code'";
 
-$coupon_limit = $row_coupons['coupon_limit'];
+									$run_used = mysqli_query($con, $add_used);
 
-$coupon_used = $row_coupons['coupon_used'];
+									$update_cart = "update cart set p_price='$coupon_price' where p_id='$coupon_pro' AND ip_add='$ip_add'";
 
+									$run_update = mysqli_query($con, $update_cart);
 
-if($coupon_limit == $coupon_used){
+									echo "<script>alert('Your Coupon Code Has Been Applied')</script>";
 
-echo "<script>alert('Your Coupon Code Has Been Expired')</script>";
+									echo "<script>window.open('cart.php','_self')</script>";
+								} else {
 
-}
-else{
+									echo "<script>alert('Product Does Not Exist In Cart')</script>";
+								}
+							}
+						} else {
 
-$get_cart = "select * from cart where p_id='$coupon_pro' AND ip_add='$ip_add'";
+							echo "<script> alert('Your Coupon Code Is Not Valid') </script>";
+						}
+					}
+				}
 
-$run_cart = mysqli_query($con,$get_cart);
 
-$check_cart = mysqli_num_rows($run_cart);
+				?>
 
+				<?php
 
-if($check_cart == 1){
+				function update_cart()
+				{
 
-$add_used = "update coupons set coupon_used=coupon_used+1 where coupon_code='$code'";
+					global $con;
 
-$run_used = mysqli_query($con,$add_used);
+					if (isset($_POST['update'])) {
 
-$update_cart = "update cart set p_price='$coupon_price' where p_id='$coupon_pro' AND ip_add='$ip_add'";
+						foreach ($_POST['remove'] as $remove_id) {
 
-$run_update = mysqli_query($con,$update_cart);
 
-echo "<script>alert('Your Coupon Code Has Been Applied')</script>";
+							$delete_product = "delete from cart where p_id='$remove_id'";
 
-echo "<script>window.open('cart.php','_self')</script>";
+							$run_delete = mysqli_query($con, $delete_product);
 
-}
-else{
+							if ($run_delete) {
+								echo "<script>window.open('cart.php','_self')</script>";
+							}
+						}
+					}
+				}
 
-echo "<script>alert('Product Does Not Exist In Cart')</script>";
+				echo @$up_cart = update_cart();
 
-}
 
-}
 
-}
-else{
+				?>
 
-echo "<script> alert('Your Coupon Code Is Not Valid') </script>";
 
-}
 
-}
+				<div id="row same-height-row"><!-- row same-height-row Starts -->
 
+					<div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 Starts -->
 
-}
+						<div class="box same-height headline"><!-- box same-height headline Starts -->
 
+							<h3 class="text-center"> You also like these Products </h3>
 
-?>
+						</div><!-- box same-height headline Ends -->
 
-<?php
+					</div><!-- col-md-3 col-sm-6 Ends -->
 
-function update_cart(){
+					<?php
 
-global $con;
+					$get_products = "select * from products order by rand() LIMIT 0,3";
 
-if(isset($_POST['update'])){
+					$run_products = mysqli_query($con, $get_products);
 
-foreach($_POST['remove'] as $remove_id){
+					while ($row_products = mysqli_fetch_array($run_products)) {
 
+						$pro_id = $row_products['product_id'];
 
-$delete_product = "delete from cart where p_id='$remove_id'";
+						$pro_title = $row_products['product_title'];
 
-$run_delete = mysqli_query($con,$delete_product);
+						$pro_price = $row_products['product_price'];
 
-if($run_delete){
-echo "<script>window.open('cart.php','_self')</script>";
-}
+						$pro_img1 = $row_products['product_img1'];
 
+						$pro_label = $row_products['product_label'];
 
+						$manufacturer_id = $row_products['manufacturer_id'];
 
-}
+						$get_manufacturer = "select * from manufacturers where manufacturer_id='$manufacturer_id'";
 
+						$run_manufacturer = mysqli_query($db, $get_manufacturer);
 
+						$row_manufacturer = mysqli_fetch_array($run_manufacturer);
 
+						$manufacturer_name = $row_manufacturer['manufacturer_title'];
 
-}
+						$pro_psp_price = $row_products['product_psp_price'];
 
+						$pro_url = $row_products['product_url'];
 
 
-}
+						if ($pro_label == "Sale" or $pro_label == "Gift") {
 
-echo @$up_cart = update_cart();
+							$product_price = "<del> $$pro_price </del>";
 
+							$product_psp_price = "| $$pro_psp_price";
+						} else {
 
+							$product_psp_price = "";
 
-?>
+							$product_price = "$$pro_price";
+						}
 
 
+						if ($pro_label == "") {
+						} else {
 
-<div id="row same-height-row"><!-- row same-height-row Starts -->
-
-<div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 Starts -->
-
-<div class="box same-height headline"><!-- box same-height headline Starts -->
-
-<h3 class="text-center"> You also like these Products </h3>
-
-</div><!-- box same-height headline Ends -->
-
-</div><!-- col-md-3 col-sm-6 Ends -->
-
-<?php
-
-$get_products = "select * from products order by rand() LIMIT 0,3";
-
-$run_products = mysqli_query($con,$get_products);
-
-while($row_products=mysqli_fetch_array($run_products)){
-
-$pro_id = $row_products['product_id'];
-
-$pro_title = $row_products['product_title'];
-
-$pro_price = $row_products['product_price'];
-
-$pro_img1 = $row_products['product_img1'];
-
-$pro_label = $row_products['product_label'];
-
-$manufacturer_id = $row_products['manufacturer_id'];
-
-$get_manufacturer = "select * from manufacturers where manufacturer_id='$manufacturer_id'";
-
-$run_manufacturer = mysqli_query($db,$get_manufacturer);
-
-$row_manufacturer = mysqli_fetch_array($run_manufacturer);
-
-$manufacturer_name = $row_manufacturer['manufacturer_title'];
-
-$pro_psp_price = $row_products['product_psp_price'];
-
-$pro_url = $row_products['product_url'];
-
-
-if($pro_label == "Sale" or $pro_label == "Gift"){
-
-$product_price = "<del> $$pro_price </del>";
-
-$product_psp_price = "| $$pro_psp_price";
-
-}
-else{
-
-$product_psp_price = "";
-
-$product_price = "$$pro_price";
-
-}
-
-
-if($pro_label == ""){
-
-
-}
-else{
-
-$product_label = "
+							$product_label = "
 
 <a class='label sale' href='#' style='color:black;'>
 
@@ -697,11 +655,10 @@ $product_label = "
 </a>
 
 ";
+						}
 
-}
 
-
-echo "
+						echo "
 
 <div class='col-md-3 col-sm-6 center-responsive' >
 
@@ -750,104 +707,102 @@ $product_label
 </div>
 
 ";
-
-
-}
+					}
 
 
 
 
-?>
+					?>
 
 
-</div><!-- row same-height-row Ends -->
+				</div><!-- row same-height-row Ends -->
 
 
-</div><!-- col-md-9 Ends -->
+			</div><!-- col-md-9 Ends -->
 
-<div class="col-md-3"><!-- col-md-3 Starts -->
+			<div class="col-md-3"><!-- col-md-3 Starts -->
 
-<div class="box" id="order-summary"><!-- box Starts -->
+				<div class="box" id="order-summary"><!-- box Starts -->
 
-<div class="box-header"><!-- box-header Starts -->
+					<div class="box-header"><!-- box-header Starts -->
 
-<h3>Order Summary</h3>
+						<h3>Order Summary</h3>
 
-</div><!-- box-header Ends -->
+					</div><!-- box-header Ends -->
 
-<p class="text-muted">
-Shipping and additional costs are calculated based on the values you have entered.
-</p>
+					<p class="text-muted">
+						Shipping and additional costs are calculated based on the values you have entered.
+					</p>
 
-<div class="table-responsive"><!-- table-responsive Starts -->
+					<div class="table-responsive"><!-- table-responsive Starts -->
 
-<table class="table"><!-- table Starts -->
+						<table class="table"><!-- table Starts -->
 
-<tbody id="cart-summary-tbody"><!-- tbody Starts -->
+							<tbody id="cart-summary-tbody"><!-- tbody Starts -->
 
-<tr>
+								<tr>
 
-<td> Order Subtotal </td>
+									<td> Order Subtotal </td>
 
-<th> $<?php echo $total; ?>.00 </th>
+									<th> $<?php echo $total; ?>.00 </th>
 
-</tr>
+								</tr>
 
-<?php if(count($physical_products) > 0){ ?>
+								<?php if (count($physical_products) > 0) { ?>
 
-<tr>
+									<tr>
 
-<th colspan="2">
+										<th colspan="2">
 
-<p class="shipping-header text-muted">
+											<p class="shipping-header text-muted">
 
-Cart Total Weight: <?php echo $total_weight; ?> Kg
+												Cart Total Weight: <?php echo $total_weight; ?> Kg
 
-</p>
+											</p>
 
-<P class="shipping-header text-muted">
+											<P class="shipping-header text-muted">
 
-<I class="fa fa-truck"></i> Shipping:
+												<I class="fa fa-truck"></i> Shipping:
 
-</P>
+											</P>
 
-<ul class="list-unstyled"><!-- ul list-unstyled Starts -->
+											<ul class="list-unstyled"><!-- ul list-unstyled Starts -->
 
-<?php
+												<?php
 
-if(isset($_SESSION['customer_email'])){
+												if (isset($_SESSION['customer_email'])) {
 
-$customer_email = $_SESSION['customer_email'];
+													$customer_email = $_SESSION['customer_email'];
 
-$get_customer = "select * from customers where customer_email='$customer_email'";
+													$get_customer = "select * from customers where customer_email='$customer_email'";
 
-$run_customer = mysqli_query($con, $get_customer);
+													$run_customer = mysqli_query($con, $get_customer);
 
-$row_customer = mysqli_fetch_array($run_customer);
+													$row_customer = mysqli_fetch_array($run_customer);
 
-$customer_id = $row_customer['customer_id'];
+													$customer_id = $row_customer['customer_id'];
 
-$select_customers_addresses = "select * from customers_addresses where customer_id='$customer_id'";
+													$select_customers_addresses = "select * from customers_addresses where customer_id='$customer_id'";
 
-$run_customers_addresses = mysqli_query($con, $select_customers_addresses);
+													$run_customers_addresses = mysqli_query($con, $select_customers_addresses);
 
-$row_customers_addresses = mysqli_fetch_array($run_customers_addresses);
+													$row_customers_addresses = mysqli_fetch_array($run_customers_addresses);
 
-$billing_country = $row_customers_addresses['billing_country'];
+													$billing_country = $row_customers_addresses['billing_country'];
 
-$billing_postcode = $row_customers_addresses['billing_postcode'];
+													$billing_postcode = $row_customers_addresses['billing_postcode'];
 
-$shipping_country = $row_customers_addresses['shipping_country'];
+													$shipping_country = $row_customers_addresses['shipping_country'];
 
-$shipping_postcode = $row_customers_addresses['shipping_postcode'];
+													$shipping_postcode = $row_customers_addresses['shipping_postcode'];
 
-$shipping_zone_id = "";
+													$shipping_zone_id = "";
 
-if(@$_SESSION["is_shipping_address_same"] == "yes"){
+													if (@$_SESSION["is_shipping_address_same"] == "yes") {
 
-if(empty($billing_country) and empty($billing_postcode)){
+														if (empty($billing_country) and empty($billing_postcode)) {
 
-echo "
+															echo "
 
 <li>
 
@@ -860,76 +815,65 @@ There are no shipping types available. Please double check your address, or cont
 </li>
 
 ";
-	
-}
+														}
 
-$select_zones = "select * from zones order by zone_order DESC";	
+														$select_zones = "select * from zones order by zone_order DESC";
 
-$run_zones = mysqli_query($con, $select_zones);
+														$run_zones = mysqli_query($con, $select_zones);
 
-while($row_zones = mysqli_fetch_array($run_zones)){
+														while ($row_zones = mysqli_fetch_array($run_zones)) {
 
-$zone_id = $row_zones['zone_id'];
+															$zone_id = $row_zones['zone_id'];
 
-$select_zones_locations = "select DISTINCT zone_id from zones_locations where zone_id='$zone_id' and (location_code='$billing_country' and location_type='country')";
+															$select_zones_locations = "select DISTINCT zone_id from zones_locations where zone_id='$zone_id' and (location_code='$billing_country' and location_type='country')";
 
-$run_zones_locations = mysqli_query($con, $select_zones_locations);
+															$run_zones_locations = mysqli_query($con, $select_zones_locations);
 
-$count_zones_locations = mysqli_num_rows($run_zones_locations);
+															$count_zones_locations = mysqli_num_rows($run_zones_locations);
 
-if($count_zones_locations != "0"){
-	
-$row_zones_locations = mysqli_fetch_array($run_zones_locations);
+															if ($count_zones_locations != "0") {
 
-$zone_id = $row_zones_locations["zone_id"];
+																$row_zones_locations = mysqli_fetch_array($run_zones_locations);
 
-$select_zone_shipping = "select * from shipping where shipping_zone='$zone_id'";
+																$zone_id = $row_zones_locations["zone_id"];
 
-$run_zone_shipping = mysqli_query($con, $select_zone_shipping);
+																$select_zone_shipping = "select * from shipping where shipping_zone='$zone_id'";
 
-$count_zone_shipping = mysqli_num_rows($run_zone_shipping);
+																$run_zone_shipping = mysqli_query($con, $select_zone_shipping);
 
-if($count_zone_shipping != "0"){
-	
-$select_zone_postcodes = "select * from zones_locations where zone_id='$zone_id' and location_type='postcode'";
+																$count_zone_shipping = mysqli_num_rows($run_zone_shipping);
 
-$run_zone_postcodes = mysqli_query($con, $select_zone_postcodes);
+																if ($count_zone_shipping != "0") {
 
-$count_zone_postcodes = mysqli_num_rows($run_zone_postcodes);
+																	$select_zone_postcodes = "select * from zones_locations where zone_id='$zone_id' and location_type='postcode'";
 
-if($count_zone_postcodes != "0"){
+																	$run_zone_postcodes = mysqli_query($con, $select_zone_postcodes);
 
-while($row_zones_postcodes = mysqli_fetch_array($run_zone_postcodes)){
-	
-$location_code = $row_zones_postcodes["location_code"];
+																	$count_zone_postcodes = mysqli_num_rows($run_zone_postcodes);
 
-if($location_code == $billing_postcode){
+																	if ($count_zone_postcodes != "0") {
 
-$shipping_zone_id = $zone_id;
-	
-}
-	
-}
-	
-}else{
+																		while ($row_zones_postcodes = mysqli_fetch_array($run_zone_postcodes)) {
 
-$shipping_zone_id = $zone_id;
-	
-}
+																			$location_code = $row_zones_postcodes["location_code"];
 
-	
-}
-	
-}
-	
+																			if ($location_code == $billing_postcode) {
 
-}
-	
-}elseif(@$_SESSION["is_shipping_address_same"] == "no"){
+																				$shipping_zone_id = $zone_id;
+																			}
+																		}
+																	} else {
 
-if(empty($shipping_country) and empty($shipping_postcode)){
+																		$shipping_zone_id = $zone_id;
+																	}
+																}
+															}
+														}
+													} elseif (@$_SESSION["is_shipping_address_same"] == "no") {
 
-echo "
+														if (empty($shipping_country) and empty($shipping_postcode)) {
+
+															echo "
 
 <li>
 
@@ -942,78 +886,66 @@ There are no shipping types available. Please double check your address, or cont
 </li>
 
 ";
-	
-}
+														}
 
-$select_zones = "select * from zones order by zone_order DESC";	
+														$select_zones = "select * from zones order by zone_order DESC";
 
-$run_zones = mysqli_query($con, $select_zones);
+														$run_zones = mysqli_query($con, $select_zones);
 
-while($row_zones = mysqli_fetch_array($run_zones)){
+														while ($row_zones = mysqli_fetch_array($run_zones)) {
 
-$zone_id = $row_zones['zone_id'];
+															$zone_id = $row_zones['zone_id'];
 
-$select_zones_locations = "select DISTINCT zone_id from zones_locations where zone_id='$zone_id' and (location_code='$shipping_country' and location_type='country')";
+															$select_zones_locations = "select DISTINCT zone_id from zones_locations where zone_id='$zone_id' and (location_code='$shipping_country' and location_type='country')";
 
-$run_zones_locations = mysqli_query($con, $select_zones_locations);
+															$run_zones_locations = mysqli_query($con, $select_zones_locations);
 
-$count_zones_locations = mysqli_num_rows($run_zones_locations);
+															$count_zones_locations = mysqli_num_rows($run_zones_locations);
 
-if($count_zones_locations != "0"){
-	
-$row_zones_locations = mysqli_fetch_array($run_zones_locations);
+															if ($count_zones_locations != "0") {
 
-$zone_id = $row_zones_locations["zone_id"];
+																$row_zones_locations = mysqli_fetch_array($run_zones_locations);
 
-$select_zone_shipping = "select * from shipping where shipping_zone='$zone_id'";
+																$zone_id = $row_zones_locations["zone_id"];
 
-$run_zone_shipping = mysqli_query($con, $select_zone_shipping);
+																$select_zone_shipping = "select * from shipping where shipping_zone='$zone_id'";
 
-$count_zone_shipping = mysqli_num_rows($run_zone_shipping);
+																$run_zone_shipping = mysqli_query($con, $select_zone_shipping);
 
-if($count_zone_shipping != "0"){
-	
-$select_zone_postcodes = "select * from zones_locations where zone_id='$zone_id' and location_type='postcode'";
+																$count_zone_shipping = mysqli_num_rows($run_zone_shipping);
 
-$run_zone_postcodes = mysqli_query($con, $select_zone_postcodes);
+																if ($count_zone_shipping != "0") {
 
-$count_zone_postcodes = mysqli_num_rows($run_zone_postcodes);
+																	$select_zone_postcodes = "select * from zones_locations where zone_id='$zone_id' and location_type='postcode'";
 
-if($count_zone_postcodes != "0"){
+																	$run_zone_postcodes = mysqli_query($con, $select_zone_postcodes);
 
-while($row_zones_postcodes = mysqli_fetch_array($run_zone_postcodes)){
-	
-$location_code = $row_zones_postcodes["location_code"];
+																	$count_zone_postcodes = mysqli_num_rows($run_zone_postcodes);
 
-if($location_code == $shipping_postcode){
+																	if ($count_zone_postcodes != "0") {
 
-$shipping_zone_id = $zone_id;
-	
-}
-	
-}
-	
-}else{
+																		while ($row_zones_postcodes = mysqli_fetch_array($run_zone_postcodes)) {
 
-$shipping_zone_id = $zone_id;
-	
-}
+																			$location_code = $row_zones_postcodes["location_code"];
 
-	
-}
-	
-}
-	
+																			if ($location_code == $shipping_postcode) {
 
-}
-	
-	
-}else{
+																				$shipping_zone_id = $zone_id;
+																			}
+																		}
+																	} else {
+
+																		$shipping_zone_id = $zone_id;
+																	}
+																}
+															}
+														}
+													} else {
 
 
-	if(empty($billing_country) and empty($billing_postcode)){
+														if (empty($billing_country) and empty($billing_postcode)) {
 
-echo "
+															echo "
 
 <li>
 
@@ -1026,76 +958,65 @@ There are no shipping types available. Please double check your address, or cont
 </li>
 
 ";
-	
-}
+														}
 
-$select_zones = "select * from zones order by zone_order DESC";	
+														$select_zones = "select * from zones order by zone_order DESC";
 
-$run_zones = mysqli_query($con, $select_zones);
+														$run_zones = mysqli_query($con, $select_zones);
 
-while($row_zones = mysqli_fetch_array($run_zones)){
+														while ($row_zones = mysqli_fetch_array($run_zones)) {
 
-$zone_id = $row_zones['zone_id'];
+															$zone_id = $row_zones['zone_id'];
 
-$select_zones_locations = "select DISTINCT zone_id from zones_locations where zone_id='$zone_id' and (location_code='$billing_country' and location_type='country')";
+															$select_zones_locations = "select DISTINCT zone_id from zones_locations where zone_id='$zone_id' and (location_code='$billing_country' and location_type='country')";
 
-$run_zones_locations = mysqli_query($con, $select_zones_locations);
+															$run_zones_locations = mysqli_query($con, $select_zones_locations);
 
-$count_zones_locations = mysqli_num_rows($run_zones_locations);
+															$count_zones_locations = mysqli_num_rows($run_zones_locations);
 
-if($count_zones_locations != "0"){
-	
-$row_zones_locations = mysqli_fetch_array($run_zones_locations);
+															if ($count_zones_locations != "0") {
 
-$zone_id = $row_zones_locations["zone_id"];
+																$row_zones_locations = mysqli_fetch_array($run_zones_locations);
 
-$select_zone_shipping = "select * from shipping where shipping_zone='$zone_id'";
+																$zone_id = $row_zones_locations["zone_id"];
 
-$run_zone_shipping = mysqli_query($con, $select_zone_shipping);
+																$select_zone_shipping = "select * from shipping where shipping_zone='$zone_id'";
 
-$count_zone_shipping = mysqli_num_rows($run_zone_shipping);
+																$run_zone_shipping = mysqli_query($con, $select_zone_shipping);
 
-if($count_zone_shipping != "0"){
-	
-$select_zone_postcodes = "select * from zones_locations where zone_id='$zone_id' and location_type='postcode'";
+																$count_zone_shipping = mysqli_num_rows($run_zone_shipping);
 
-$run_zone_postcodes = mysqli_query($con, $select_zone_postcodes);
+																if ($count_zone_shipping != "0") {
 
-$count_zone_postcodes = mysqli_num_rows($run_zone_postcodes);
+																	$select_zone_postcodes = "select * from zones_locations where zone_id='$zone_id' and location_type='postcode'";
 
-if($count_zone_postcodes != "0"){
+																	$run_zone_postcodes = mysqli_query($con, $select_zone_postcodes);
 
-while($row_zones_postcodes = mysqli_fetch_array($run_zone_postcodes)){
-	
-$location_code = $row_zones_postcodes["location_code"];
+																	$count_zone_postcodes = mysqli_num_rows($run_zone_postcodes);
 
-if($location_code == $billing_postcode){
+																	if ($count_zone_postcodes != "0") {
 
-$shipping_zone_id = $zone_id;
-	
-}
-	
-}
-	
-}else{
+																		while ($row_zones_postcodes = mysqli_fetch_array($run_zone_postcodes)) {
 
-$shipping_zone_id = $zone_id;
-	
-}
+																			$location_code = $row_zones_postcodes["location_code"];
 
-	
-}
-	
-}
-	
+																			if ($location_code == $billing_postcode) {
 
-}
-	
-}
+																				$shipping_zone_id = $zone_id;
+																			}
+																		}
+																	} else {
 
-if(!empty($shipping_zone_id)){
+																		$shipping_zone_id = $zone_id;
+																	}
+																}
+															}
+														}
+													}
 
-$select_shipping_types = "
+													if (!empty($shipping_zone_id)) {
+
+														$select_shipping_types = "
 select *,if(
 $total_weight > (
 select max(shipping_weight) from shipping
@@ -1113,89 +1034,78 @@ AND shipping_zone='$shipping_zone_id' AND shipping_weight >= '$total_weight' ord
 ) AS shipping_cost from shipping_types where type_local='yes' order by type_order ASC
 ";
 
-$run_shipping_types = mysqli_query($con, $select_shipping_types);
+														$run_shipping_types = mysqli_query($con, $select_shipping_types);
 
-$i = 0;
+														$i = 0;
 
-while($row_shipping_types = mysqli_fetch_array($run_shipping_types)){
+														while ($row_shipping_types = mysqli_fetch_array($run_shipping_types)) {
 
-$i++;	
+															$i++;
 
-$type_id = $row_shipping_types['type_id'];
+															$type_id = $row_shipping_types['type_id'];
 
-$type_name = $row_shipping_types['type_name'];
+															$type_name = $row_shipping_types['type_name'];
 
-$type_default = $row_shipping_types['type_default'];
+															$type_default = $row_shipping_types['type_default'];
 
-$shipping_cost = $row_shipping_types['shipping_cost'];
+															$shipping_cost = $row_shipping_types['shipping_cost'];
 
-if(!empty($shipping_cost)){
+															if (!empty($shipping_cost)) {
 
-?>
+												?>
 
-<li>
+																<li>
 
-<input type="radio" name="shipping_type" value="<?php echo $type_id; ?>" class="shipping_type" data-shipping_cost="<?php echo $shipping_cost; ?>" 
+																	<input type="radio" name="shipping_type" value="<?php echo $type_id; ?>" class="shipping_type" data-shipping_cost="<?php echo $shipping_cost; ?>" <?php
 
-<?php
+																																																						if ($type_default == "yes") {
 
-if($type_default == "yes"){
+																																																							$_SESSION["shipping_type"] = $type_id;
 
-$_SESSION["shipping_type"] = $type_id;
+																																																							$_SESSION["shipping_cost"] = $shipping_cost;
 
-$_SESSION["shipping_cost"] = $shipping_cost;
+																																																							echo "checked";
+																																																						} elseif ($i == 1) {
 
-echo "checked";
-	
-}elseif($i == 1){
-	
-$_SESSION["shipping_type"] = $type_id;
+																																																							$_SESSION["shipping_type"] = $type_id;
 
-$_SESSION["shipping_cost"] = $shipping_cost;
+																																																							$_SESSION["shipping_cost"] = $shipping_cost;
 
-echo "checked";	
-	
-}
+																																																							echo "checked";
+																																																						}
 
-?>
+																																																						?>>
 
->
+																	<?php echo $type_name; ?>: <span class="text-muted"> $<?php echo $shipping_cost; ?> </span>
 
-<?php echo $type_name; ?>: <span class="text-muted"> $<?php echo $shipping_cost; ?> </span>
+																</li>
 
-</li>
+																<?php
 
-<?php
-	
-}
-	
-}
-	
-}else{
+															}
+														}
+													} else {
 
-if(!empty($billing_country) or !empty($shipping_country)){
+														if (!empty($billing_country) or !empty($shipping_country)) {
 
-if(@$_SESSION["is_shipping_address_same"] == "yes"){
+															if (@$_SESSION["is_shipping_address_same"] == "yes") {
 
-$select_country_shipping = "select * from shipping where shipping_country='$billing_country'";
-	
-}elseif(@$_SESSION["is_shipping_address_same"] == "no"){
+																$select_country_shipping = "select * from shipping where shipping_country='$billing_country'";
+															} elseif (@$_SESSION["is_shipping_address_same"] == "no") {
 
-$select_country_shipping = "select * from shipping where shipping_country='$shipping_country'";	
-	
-}else{
+																$select_country_shipping = "select * from shipping where shipping_country='$shipping_country'";
+															} else {
 
-$select_country_shipping = "select * from shipping where shipping_country='$billing_country'";	
-	
-}
+																$select_country_shipping = "select * from shipping where shipping_country='$billing_country'";
+															}
 
-$run_country_shipping = mysqli_query($con, $select_country_shipping);
+															$run_country_shipping = mysqli_query($con, $select_country_shipping);
 
-$count_country_shipping = mysqli_num_rows($run_country_shipping);
+															$count_country_shipping = mysqli_num_rows($run_country_shipping);
 
-if($count_country_shipping == "0"){
+															if ($count_country_shipping == "0") {
 
-echo "
+																echo "
 
 <li>
 
@@ -1208,12 +1118,11 @@ There are no shipping types matched/available for your address, or contact us if
 </li>
 
 ";
-	
-}else{
-	
-if(@$_SESSION["is_shipping_address_same"] == "yes"){
+															} else {
 
-$select_shipping_types = "
+																if (@$_SESSION["is_shipping_address_same"] == "yes") {
+
+																	$select_shipping_types = "
 select *,if(
 $total_weight > (
 select max(shipping_weight) from shipping
@@ -1230,10 +1139,9 @@ AND shipping_country='$billing_country' AND shipping_weight >= '$total_weight' o
 
 ) AS shipping_cost from shipping_types where type_local='no' order by type_order ASC
 ";
-	
-}elseif(@$_SESSION["is_shipping_address_same"] == "no"){
+																} elseif (@$_SESSION["is_shipping_address_same"] == "no") {
 
-$select_shipping_types = "
+																	$select_shipping_types = "
 select *,if(
 $total_weight > (
 select max(shipping_weight) from shipping
@@ -1250,10 +1158,9 @@ AND shipping_country='$shipping_country' AND shipping_weight >= '$total_weight' 
 
 ) AS shipping_cost from shipping_types where type_local='no' order by type_order ASC
 ";
-	
-}else{
+																} else {
 
-$select_shipping_types = "
+																	$select_shipping_types = "
 select *,if(
 $total_weight > (
 select max(shipping_weight) from shipping
@@ -1269,79 +1176,65 @@ AND shipping_country='$billing_country' AND shipping_weight >= '$total_weight' o
 )
 
 ) AS shipping_cost from shipping_types where type_local='no' order by type_order ASC
-";	
-	
-}
+";
+																}
 
-$run_shipping_types = mysqli_query($con, $select_shipping_types);
+																$run_shipping_types = mysqli_query($con, $select_shipping_types);
 
-$i = 0;
+																$i = 0;
 
-while($row_shipping_types = mysqli_fetch_array($run_shipping_types)){
+																while ($row_shipping_types = mysqli_fetch_array($run_shipping_types)) {
 
-$i++;	
+																	$i++;
 
-$type_id = $row_shipping_types['type_id'];
+																	$type_id = $row_shipping_types['type_id'];
 
-$type_name = $row_shipping_types['type_name'];
+																	$type_name = $row_shipping_types['type_name'];
 
-$type_default = $row_shipping_types['type_default'];
+																	$type_default = $row_shipping_types['type_default'];
 
-$shipping_cost = $row_shipping_types['shipping_cost'];
+																	$shipping_cost = $row_shipping_types['shipping_cost'];
 
-if(!empty($shipping_cost)){
+																	if (!empty($shipping_cost)) {
 
-?>
+																?>
 
-<li>
+																		<li>
 
-<input type="radio" name="shipping_type" value="<?php echo $type_id; ?>" class="shipping_type" data-shipping_cost="<?php echo $shipping_cost; ?>" 
+																			<input type="radio" name="shipping_type" value="<?php echo $type_id; ?>" class="shipping_type" data-shipping_cost="<?php echo $shipping_cost; ?>" <?php
 
-<?php
+																																																								if ($type_default == "yes") {
 
-if($type_default == "yes"){
+																																																									$_SESSION["shipping_type"] = $type_id;
 
-$_SESSION["shipping_type"] = $type_id;
+																																																									$_SESSION["shipping_cost"] = $shipping_cost;
 
-$_SESSION["shipping_cost"] = $shipping_cost;
+																																																									echo "checked";
+																																																								} elseif ($i == 1) {
 
-echo "checked";
-	
-}elseif($i == 1){
-	
-$_SESSION["shipping_type"] = $type_id;
+																																																									$_SESSION["shipping_type"] = $type_id;
 
-$_SESSION["shipping_cost"] = $shipping_cost;
+																																																									$_SESSION["shipping_cost"] = $shipping_cost;
 
-echo "checked";	
-	
-}
+																																																									echo "checked";
+																																																								}
 
-?>
+																																																								?>>
 
->
+																			<?php echo $type_name; ?>: <span class="text-muted"> $<?php echo $shipping_cost; ?> </span>
 
-<?php echo $type_name; ?>: <span class="text-muted"> $<?php echo $shipping_cost; ?> </span>
+																		</li>
 
-</li>
+												<?php
 
-<?php
-	
-}
-	
-}
-	
-}
+																	}
+																}
+															}
+														}
+													}
+												} else {
 
-
-	
-}
-	
-}
-
-}else{
-	
-echo "
+													echo "
 
 <li>
 
@@ -1350,134 +1243,136 @@ echo "
 </li>
 
 ";
-	
-}
+												}
 
 
-?>
+												?>
 
-</ul><!-- ul list-unstyled Ends -->
+											</ul><!-- ul list-unstyled Ends -->
 
-</th>
+										</th>
 
-</tr>
+									</tr>
 
-<?php 
+								<?php
 
-$total_cart_price = $total + @$_SESSION["shipping_cost"];
+									$total_cart_price = $total + @$_SESSION["shipping_cost"];
+								}
 
-} 
+								?>
 
-?>
+								<tr>
 
-<tr>
+									<td>Tax</td>
 
-<td>Tax</td>
+									<th>$0.00</th>
 
-<th>$0.00</th>
+								</tr>
 
-</tr>
+								<tr class="total">
 
-<tr class="total">
+									<td>Total</td>
 
-<td>Total</td>
+									<?php if (count($physical_products) > 0) { ?>
 
-<?php if(count($physical_products) > 0){ ?>
+										<th class="total-cart-price">$<?php echo $total_cart_price; ?>.00</th>
 
-<th class="total-cart-price">$<?php echo $total_cart_price; ?>.00</th>
+									<?php } else { ?>
 
-<?php }else{ ?>
+										<th class="total-cart-price">$<?php echo $total; ?>.00</th>
 
-<th class="total-cart-price">$<?php echo $total; ?>.00</th>
+									<?php } ?>
 
-<?php } ?>
+								</tr>
 
-</tr>
+							</tbody><!-- tbody Ends -->
 
-</tbody><!-- tbody Ends -->
+						</table><!-- table Ends -->
 
-</table><!-- table Ends -->
+					</div><!-- table-responsive Ends -->
 
-</div><!-- table-responsive Ends -->
+				</div><!-- box Ends -->
 
-</div><!-- box Ends -->
+			</div><!-- col-md-3 Ends -->
 
-</div><!-- col-md-3 Ends -->
-
-</div><!-- container Ends -->
-</div><!-- content Ends -->
+		</div><!-- container Ends -->
+	</div><!-- content Ends -->
 
 
 
-<?php
+	<?php
 
-include("includes/footer.php");
+	include("includes/footer.php");
 
-?>
+	?>
 
-<script src="js/jquery.min.js"> </script>
+	<script src="js/jquery.min.js"> </script>
 
-<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
-<script>
+	<script>
+		$(document).ready(function(data) {
 
-$(document).ready(function(data){
+			$(document).on('keyup', '.quantity', function() {
 
-$(document).on('keyup', '.quantity', function(){
+				var id = $(this).data("product_id");
 
-var id = $(this).data("product_id");
+				var quantity = $(this).val();
 
-var quantity = $(this).val();
+				var shipping_type = $("input[name=shipping_type]:checked").val();
 
-var shipping_type = $("input[name=shipping_type]:checked").val();
+				var shipping_cost = Number($("input[name=shipping_type]:checked").data("shipping_cost"));
 
-var shipping_cost = Number($("input[name=shipping_type]:checked").data("shipping_cost"));
+				if (quantity != '') {
 
-if(quantity  != ''){
+					$.ajax({
 
-$.ajax({
+						url: "change.php",
 
-url:"change.php",
+						method: "POST",
 
-method:"POST",
+						data: {
+							id: id,
+							quantity: quantity,
+							shipping_type: shipping_type,
+							shipping_cost: shipping_cost
+						},
 
-data:{id:id, quantity:quantity, shipping_type: shipping_type, shipping_cost: shipping_cost},
+						success: function(data) {
 
-success:function(data){
-	
-$(".subtotal-cart-price").html(data);
+							$(".subtotal-cart-price").html(data);
 
-$("#cart-products-tbody").load("cart_products_tbody.php");
+							$("#cart-products-tbody").load("cart_products_tbody.php");
 
-$("#cart-summary-tbody").load("cart_summary_tbody.php");
+							$("#cart-summary-tbody").load("cart_summary_tbody.php");
 
-}
+						}
 
-});
+					});
 
-}
+				}
 
-});
+			});
 
-<?php if(count($physical_products) > 0){ ?>
+			<?php if (count($physical_products) > 0) { ?>
 
-$(document).on("change", ".shipping_type", function(){
-	
-var shipping_cost = Number($(this).data("shipping_cost"));
+				$(document).on("change", ".shipping_type", function() {
 
-var total = Number(<?php echo $total; ?>);
+					var shipping_cost = Number($(this).data("shipping_cost"));
 
-var total_cart_price = total + shipping_cost;
+					var total = Number(<?php echo $total; ?>);
 
-$(".total-cart-price").html("$" + total_cart_price + ".00");
-	
-});
+					var total_cart_price = total + shipping_cost;
 
-<?php } ?>
+					$(".total-cart-price").html("$" + total_cart_price + ".00");
 
-});
+				});
 
-</script>
+			<?php } ?>
+
+		});
+	</script>
 
 </body>
+
 </html>
